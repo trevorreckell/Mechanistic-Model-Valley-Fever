@@ -143,7 +143,7 @@ If you use this code, please cite the paper above. To cite this repository
 directly, use the archived release DOI:
 
 ```
-[INSERT ZENODO DOI]
+10.5281/zenodo.22234185
 ```
 
 ---
