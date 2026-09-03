@@ -64,40 +64,6 @@ on the order of days on a compute cluster. Sections `1` through `5` write
 `bestSoFar_M<n>_<region>_<fit|for>.mat` checkpoints as they go, so a run can be
 resumed. Sections `8` through `10` run in minutes.
 
----
-
-## Fitted parameter vectors are not included
-
-The parameter vectors produced by the particle swarm fits are **not distributed
-in this repository.** Sections `8`, `9` and `10` contain shape-preserving
-placeholders where they belong:
-
-```matlab
-% index: PARAMS{model,region}; model 1..5 = M1,M2,M3,M4a,M4b;
-% region 1..4 = arizona, maricopa, pima, pinal.
-% vector lengths: m1 14, m2 22, m3 35, m4a 44, m4b 46.
-PARAMS{1,1} = { [] ; [] ; [] };   % m1 (14)
-```
-
-Two forms appear. Section `8` and section `10` use the three-window form, one
-vector per expanding-window forecast year (fit through 2020, 2021, 2022).
-Section `9` uses the single full-sample form, fitted over all 132 months.
-
-Paste a vector between any pair of brackets and the surrounding code runs
-unchanged. Parameter order for each model is given in the
-`ORDER:` comments and in the parameter tables of the paper's Supplementary
-Information.
-
-Sections `3`, `4` and `5` also contain `seed_*` placeholders that supply a warm
-start to the optimizer:
-
-```matlab
-seed_AZ       = [];
-seed_MARICOPA = [];
-```
-
-Leaving a seed empty cold-starts that region, which is a supported path. Filling
-one in makes it particle 1 of the initial swarm.
 
 ---
 
