@@ -8,7 +8,7 @@ Accompanies:
 
 > Reckell, T., Sterner, B., Engelthaler, D. M., & Jevtić, P. A Mechanistic Model
 > Hierarchy for Valley Fever: Wildlife Reservoir Dynamics Improve Forecasts Over
-> Climate-Only Baselines. *[journal, year]*.
+> Climate-Only Baselines. *[IN REVIEW]*.
 
 ---
 
@@ -23,6 +23,32 @@ Accompanies:
 | `MMVF_LSA_8_28_26.m` | Local sensitivity analysis. Computes the Integrated Absolute Normalized Sensitivity (IANS) of monthly incidence to every dynamic parameter. |
 | `az-coccidioidomycosis-surveillance-data-*.xlsx` | Source surveillance data: monthly confirmed coccidioidomycosis cases for Arizona and Maricopa, Pima and Pinal counties. |
 | `LICENSE.md` | License. |
+
+
+## Repository contents
+
+| File | Description |
+|---|---|
+| `Mechanistic_Models_VF.m` | Main script. All five mechanistic models, the fitting and forecasting routines, the Diebold–Mariano comparison, and the plotting sections. |
+| `Tamerius_Comrie_Model.m` | Statistical baseline 1: linear regression of incidence on temperature and PM<sub>10</sub> lagged one month and precipitation lagged 19 and 25 months. These are the published Tamerius–Comrie lags shifted one month further back, which fit better with the same model structure. |
+| `NBGLM_VF_8_24_26.m` | Statistical baseline 2: negative binomial distributed-lag GLM with degree-3 Almon crossbasis terms over 25 monthly lags. |
+| `XGBoost_Allregions_8_24_26.m` | Statistical baseline 3: gradient-boosted regression trees, 300 trees of depth 3. |
+| `Tamerius_Comrie_Model.R` | R version of baseline 1, base R only. A `LAG_SET` switch runs either the shifted lags used in the paper or the published lags (concurrent temperature and PM<sub>10</sub>, precipitation at 18 and 24 months). |
+| `NBGLM_VF.R` | R version of baseline 2, base R only. Fits by negative binomial maximum likelihood and plots the estimated temperature and Palmer Z lag-response curves for each region. |
+| `XGBoost_Allregions.R` | R version of baseline 3, using the `xgboost` R package (version 2.0 or newer). |
+| `MMVF_LSA_8_28_26.m` | Local sensitivity analysis. Computes the Integrated Absolute Normalized Sensitivity (IANS) of monthly incidence to every dynamic parameter. |
+| `az-coccidioidomycosis-surveillance-data-*.xlsx` | Source surveillance data: monthly confirmed coccidioidomycosis cases for Arizona and Maricopa, Pima and Pinal counties. |
+| `LICENSE.md` | License. |
+
+## R versions of the statistical baselines
+
+The three `.R` scripts are similiar to the MATLAB baseline scripts. They use the same data, the same expanding windows (fit on 96, 108 and 120 months, then forecast the next 12), the same error formulas, and the same naive benchmarks (persistence, seasonal naive and training mean), so the baselines can be read and checked without MATLAB. If you work in R, start with `NBGLM_VF.R`, since the negative binomial distributed-lag model is the standard model class for coccidioidomycosis surveillance counts.
+
+The paper uses MATLAB results though. The baselines were fit in MATLAB alongside the mechanistic models so that every model shared the same data alignment and error calculations, and their forecast residuals feed the Diebold–Mariano comparison in `Mechanistic_Models_VF.m`. The R scripts were written as standalone versions for anyone who wants to run, check or extend the baselines in R. 
+
+**Running them.** Open a script in RStudio and click Source. Each script carries its data inline, so it runs from a fresh clone with no other files. Results print to the console, figures appear in the Plots pane, and per-region results are saved as `.rds` files in the working directory. The Tamerius–Comrie script also writes `TC_stat_forecast_residuals.csv`, the forecast residuals used by the Diebold–Mariano test.
+
+**What should match.** The Tamerius–Comrie regression is deterministic, so its R and MATLAB results agree. The NB-GLM uses R's `optim` in place of MATLAB's `fminsearch` and `fminunc`, so the last decimal places of coefficients and information criteria can differ. XGBoost matches only when both sides use xgboost 2.0 or newer, since older versions used a different default base score and tree method.
 
 ---
 
