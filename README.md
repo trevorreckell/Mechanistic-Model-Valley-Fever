@@ -17,7 +17,7 @@ Accompanies:
 | File | Description |
 |---|---|
 | `Mechanistic_Models_VF.m` | Main script. All five mechanistic models, the fitting and forecasting routines, the Diebold–Mariano comparison, and the plotting sections. |
-| `Tamerius_Comrie_Model.m` | Statistical baseline 1: linear regression of incidence on temperature and PM<sub>10</sub> lagged one month and precipitation lagged 19 and 25 months. These are the published Tamerius–Comrie lags shifted one month further back, which fit better with the same model structure. |
+| `Tamerius_Comrie_Model.m` | Statistical baseline 1: linear regression of incidence on lagged temperature and PM<sub>10</sub>. |
 | `NBGLM_VF_8_24_26.m` | Statistical baseline 2: negative binomial distributed-lag GLM with degree-3 Almon crossbasis terms over 25 monthly lags. |
 | `XGBoost_Allregions_8_24_26.m` | Statistical baseline 3: gradient-boosted regression trees, 300 trees of depth 3. |
 | `Tamerius_Comrie_Model.R` | R version of baseline 1, base R only. A `LAG_SET` switch runs either the shifted lags used in the paper or the published lags (concurrent temperature and PM<sub>10</sub>, precipitation at 18 and 24 months). |
