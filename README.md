@@ -17,19 +17,6 @@ Accompanies:
 | File | Description |
 |---|---|
 | `Mechanistic_Models_VF.m` | Main script. All five mechanistic models, the fitting and forecasting routines, the Diebold–Mariano comparison, and the plotting sections. |
-| `Tamerius_Comrie_Model.m` | Statistical baseline 1: linear regression on concurrent temperature and PM<sub>10</sub> with precipitation lagged 18 and 24 months. |
-| `NBGLM_VF_8_24_26.m` | Statistical baseline 2: negative binomial distributed-lag GLM with degree-3 Almon crossbasis terms over 25 monthly lags. |
-| `XGBoost_Allregions_8_24_26.m` | Statistical baseline 3: gradient-boosted regression trees, 300 trees of depth 3. |
-| `MMVF_LSA_8_28_26.m` | Local sensitivity analysis. Computes the Integrated Absolute Normalized Sensitivity (IANS) of monthly incidence to every dynamic parameter. |
-| `az-coccidioidomycosis-surveillance-data-*.xlsx` | Source surveillance data: monthly confirmed coccidioidomycosis cases for Arizona and Maricopa, Pima and Pinal counties. |
-| `LICENSE.md` | License. |
-
-
-## Repository contents
-
-| File | Description |
-|---|---|
-| `Mechanistic_Models_VF.m` | Main script. All five mechanistic models, the fitting and forecasting routines, the Diebold–Mariano comparison, and the plotting sections. |
 | `Tamerius_Comrie_Model.m` | Statistical baseline 1: linear regression of incidence on temperature and PM<sub>10</sub> lagged one month and precipitation lagged 19 and 25 months. These are the published Tamerius–Comrie lags shifted one month further back, which fit better with the same model structure. |
 | `NBGLM_VF_8_24_26.m` | Statistical baseline 2: negative binomial distributed-lag GLM with degree-3 Almon crossbasis terms over 25 monthly lags. |
 | `XGBoost_Allregions_8_24_26.m` | Statistical baseline 3: gradient-boosted regression trees, 300 trees of depth 3. |
